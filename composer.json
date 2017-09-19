@@ -4,5 +4,8 @@
     },
     "autoload": {
         "psr-4": {"": "src/"}
+    },
+    "require": {
+        "jc21/clitable": "^1.1"
     }
 }
