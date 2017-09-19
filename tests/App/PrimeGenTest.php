@@ -5,6 +5,18 @@ use PHPUnit\Framework\TestCase;
 
 class PrimeGenTest extends TestCase
 {
+    public function testGenerate1Prime()
+    {
+        $n = 1;
+        $this->assertEquals([2], $this->generator->generatePrimes($n));
+    }
+
+    public function testGenerate2Primes()
+    {
+        $n = 2;
+        $this->assertEquals([2, 3], $this->generator->generatePrimes($n));
+    }
+
     public function setUp()
     {
         $promise = new stdClass;
@@ -17,17 +29,5 @@ class PrimeGenTest extends TestCase
         })->shouldBeCalled();
 
         $this->generator = new PrimeGen($core->reveal());
-    }
-
-    public function testGenerate1Prime()
-    {
-        $n = 1;
-        $this->assertEquals([2], $this->generator->generatePrimes($n));
-    }
-
-    public function testGenerate2Primes()
-    {
-        $n = 2;
-        $this->assertEquals([2, 3], $this->generator->generatePrimes($n));
     }
 }
