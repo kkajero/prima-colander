@@ -10,9 +10,16 @@ class SieveTest extends TestCase
         $this->assertEquals(2, $this->sieve->currentPrime());
     }
 
-    public function testNextPrime()
+    public function testNextPrimeStart()
     {
         $this->assertEquals(2, $this->sieve->nextPrime());
+    }
+
+    public function testNextPrimeRepeat()
+    {
+        $this->assertEquals(2, $this->sieve->nextPrime());
+        $this->assertEquals(3, $this->sieve->nextPrime());
+        $this->assertEquals(3, $this->sieve->currentPrime());
     }
 
     public function setUp()
