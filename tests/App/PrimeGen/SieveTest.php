@@ -24,13 +24,7 @@ class SieveTest extends TestCase
 
     public function testNextPrimeEnd()
     {
-        $sieve = new Sieve(($integerLimit = 7));
-
-        $i = 1;
-        while ($i <= 4) {
-            $sieve->nextPrime();
-            $i++;
-        }
+        $sieve = $this->exerciseSieve(7, 4);
 
         $this->assertEquals(7, $sieve->currentPrime());
     }
@@ -40,13 +34,7 @@ class SieveTest extends TestCase
      */
     public function testNextPrimeBeyondEnd()
     {
-        $sieve = new Sieve(($integerLimit = 7));
-
-        $i = 1;
-        while ($i <= 5) {
-            $sieve->nextPrime();
-            $i++;
-        }
+        $sieve = $this->exerciseSieve(7, 5);
     }
 
     /**
@@ -54,13 +42,7 @@ class SieveTest extends TestCase
      */
     public function testNextPrimeSmallRange()
     {
-        $sieve = new Sieve(($integerLimit = 1E3));
-
-        $i = 1;
-        while ($i <= 168) {
-            $sieve->nextPrime();
-            $i++;
-        }
+        $sieve = $this->exerciseSieve(1E3, 168);
 
         $this->assertEquals(997, $sieve->currentPrime());
     }
@@ -68,5 +50,18 @@ class SieveTest extends TestCase
     public function setUp()
     {
         $this->sieve = new Sieve;
+    }
+
+    private function exerciseSieve($limit, $invocations)
+    {
+        $sieve = new Sieve($limit);
+
+        $i = 1;
+        while ($i <= $invocations) {
+            $sieve->nextPrime();
+            $i++;
+        }
+
+        return $sieve;
     }
 }
