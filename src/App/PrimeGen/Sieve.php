@@ -15,7 +15,7 @@ class Sieve implements Core
     public function __construct($integerLimit = 100)
     {
         $this->end = $integerLimit;
-        $range = range($this->currentPrime, $this->end);
+        $range = range($this->currentPrime + 1, $this->end, 2);
         $this->integers = array_fill_keys($range, true);
     }
 
@@ -52,11 +52,11 @@ class Sieve implements Core
     {
         $next = $this->currentPrime + 1;
 
-        while ($next < $this->end && !$this->integers[$next]) {
+        while (isset($this->integers[$next]) && $next < $this->end && !$this->integers[$next]) {
             $next++;
         }
 
-        if ($next <= $this->end && $next % 2) {
+        if ($next <= $this->end) {
             $this->currentPrime = $next;
         } else {
             throw new Exception\LimitReached;
