@@ -24,6 +24,11 @@ class Sieve implements Core
         return $this->currentPrime;
     }
 
+    /**
+     * @throws App\PrimeGen\Exception\LimitReached when configured integer limit is exceeded
+     *
+     * @return integer
+     */
     public function nextPrime()
     {
         if ($this->atStart) {
@@ -38,7 +43,7 @@ class Sieve implements Core
 
     private function strikeOutCurrentPrimeMultiples()
     {
-        for ($i = $this->currentPrime ** 2; $i < $this->end; $i += $this->currentPrime) {
+        for ($i = $this->currentPrime ** 2; $i <= $this->end; $i += $this->currentPrime) {
             $this->integers[$i] = false;
         }
     }
@@ -46,11 +51,17 @@ class Sieve implements Core
     private function seekToNextPrime()
     {
         $next = $this->currentPrime + 1;
+
         while ($next < $this->end && !$this->integers[$next]) {
             $next++;
         }
-        $this->currentPrime = $next;
 
-        return $next;
+        if ($next <= $this->end && $next % 2) {
+            $this->currentPrime = $next;
+        } else {
+            throw new Exception\LimitReached;
+        }
+
+        return $this->currentPrime;
     }
 }
