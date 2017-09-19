@@ -20,6 +20,6 @@ class PrimeGen
             $count = array_push($this->primes, $this->core->nextPrime());
         }
 
-        return $this->primes;
+        return array_slice($this->primes, 0, $n);
     }
 }

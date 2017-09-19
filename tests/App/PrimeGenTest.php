@@ -23,6 +23,12 @@ class PrimeGenTest extends TestCase
         $this->assertEquals([2, 3, 5, 7, 11], $this->generator->generatePrimes($n));
     }
 
+    public function testGeneratePrimeMultipleInvocations()
+    {
+        $this->generator->generatePrimes(5);
+        $this->assertEquals([2, 3], $this->generator->generatePrimes(2));
+    }
+
     public function setUp()
     {
         $promise = new stdClass;
