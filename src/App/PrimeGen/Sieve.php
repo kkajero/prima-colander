@@ -8,12 +8,13 @@ namespace App\PrimeGen;
 class Sieve implements Core
 {
     private $integers;
+    private $end;
     private $currentPrime = 2;
-    private $end = 12;
     private $atStart = true;
 
-    public function __construct()
+    public function __construct($integerLimit = 100)
     {
+        $this->end = $integerLimit;
         $range = range($this->currentPrime, $this->end);
         $this->integers = array_fill_keys($range, true);
     }
