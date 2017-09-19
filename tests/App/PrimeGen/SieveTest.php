@@ -49,6 +49,22 @@ class SieveTest extends TestCase
         }
     }
 
+    /**
+     * Sources of values of N or pi(x): https://primes.utm.edu/howmany.html; http://primes.utm.edu/nthprime/
+     */
+    public function testNextPrimeSmallRange()
+    {
+        $sieve = new Sieve(($integerLimit = 1E3));
+
+        $i = 1;
+        while ($i <= 168) {
+            $sieve->nextPrime();
+            $i++;
+        }
+
+        $this->assertEquals(997, $sieve->currentPrime());
+    }
+
     public function setUp()
     {
         $this->sieve = new Sieve;
