@@ -47,6 +47,20 @@ class SieveTest extends TestCase
         $this->assertEquals(997, $sieve->currentPrime());
     }
 
+    public function testNextPrimeMediumRange()
+    {
+        $sieve = $this->exerciseSieve(1E4, 1229);
+
+        $this->assertEquals(9973, $sieve->currentPrime());
+    }
+
+    public function testNextPrimeLargeRange()
+    {
+        $sieve = $this->exerciseSieve(1E6, 78498);
+
+        $this->assertEquals(999983, $sieve->currentPrime());
+    }
+
     public function setUp()
     {
         $this->sieve = new Sieve;
